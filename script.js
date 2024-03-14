@@ -5,24 +5,17 @@ const toast_content = document.getElementById("content");
 const API_URL = "https://api.ecoledirecte.com/v3";
 const API_VER = "4.53.1";
 const COMMON_HEADERS = {
-    //'authority': 'api.ecoledirecte.com',
     'accept': 'application/json, text/plain, */*',
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
+    'accept-encoding': 'gzip, deflate, br',
     'content-type': 'application/x-www-form-urlencoded',
-    'sec-gpc': '1',
-    'origin': 'https://www.ecoledirecte.com',
-    'sec-fetch-site': 'same-site',
-    'sec-fetch-mode': 'cors',
-    'sec-fetch-dest': 'empty',
-    'referer': 'https://www.ecoledirecte.com/',
-    'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7'
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
 }
 
 
 async function login(username, password) {
     try {
-        let payload = `data={"identifiant":"${username}","motdepasse":"${password}"}`
-        let response = await fetch(`${API_URL}/login.awp`, {
+        let payload = `data={"identifiant":"${username}","motdepasse":"${password}","isReLogin":false,"uuid":""}`
+        let response = await fetch(`${API_URL}/login.awp?v=${API_VER}`, {
             method: 'POST',
             headers: COMMON_HEADERS,
             body: encodeURIComponent(payload)
